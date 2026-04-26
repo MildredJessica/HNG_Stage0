@@ -38,8 +38,15 @@ async function gender() {
             data['sample_size'] = data['count'];
             delete data['count'];
             console.log(data);
-            
-            if (data['probability'] > 0.7 && data['sample_size'] > 100) {
+            if(data.gender === null || data.sample_size === 0){
+                newData ={
+                    status: "error",
+                    message: "No prediction available for the provided name"
+                }
+                console.log(newData);
+                return newData;
+            }
+            else if (data['probability'] > 0.7 && data['sample_size'] > 100) {
                 newData = {
                     status: "success",
                     data: {
