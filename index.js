@@ -1,9 +1,13 @@
 let submitBtn = document.querySelector(".submit-btn");
+let result = document.getElementById("result");
 let is_confident = false;
 let newData = {}
-submitBtn.addEventListener("click", function (e) {
+
+submitBtn.addEventListener("click", async function (e) {
     e.preventDefault();
-    gender();
+    await gender();
+    console.log(newData);
+    result.textContent = JSON.stringify(newData, null, 2);
 });
 
 // Function to get the gender of a name
@@ -68,4 +72,3 @@ async function gender() {
     }
     
 }
-
