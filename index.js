@@ -14,13 +14,11 @@ submitBtn.addEventListener("click", function (e) {
 // Returns a formatted json response
 async function gender() {
     const fName = document.getElementById("name").value;
-    console.log(fName);
     if (fName === "") {
         newData = {
             status: "error",
             message: "Bad Request"
         }
-        console.log(newData);
         return newData;
     }
     else if (typeof fName !== "string") {
@@ -28,7 +26,6 @@ async function gender() {
             status: "error",
             message: "Unprocessable Entity"
         }
-        console.log(newData);
         return newData;
     }
     else{
@@ -37,13 +34,11 @@ async function gender() {
             const data = await response.json();
             data['sample_size'] = data['count'];
             delete data['count'];
-            console.log(data);
             if(data.gender === null || data.sample_size === 0){
                 newData ={
                     status: "error",
                     message: "No prediction available for the provided name"
                 }
-                console.log(newData);
                 return newData;
             }
             else if (data['probability'] > 0.7 && data['sample_size'] > 100) {
@@ -58,7 +53,6 @@ async function gender() {
                         processed_at: new Date().toISOString()
                     }
                 }
-                console.log(newData);
                 return newData;
             }
             else{
@@ -66,7 +60,6 @@ async function gender() {
                     status: "error",
                     message: "Probability is less than 0.7 or sample size is less than 100"
                 }
-                console.log(newData);
                 return newData;
             }
         } catch (error) {
